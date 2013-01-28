@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "KotAtGent-Home";
+}
+@section scripts{
+    <!--script src="~/Scripts/site/getRemoteData.js"></script-->
+    <script src="https://maps.google.com/maps/api/js?libraries=geometry&sensor=false"></script>
+    @Styles.Render("~/Home/css")
+    @Scripts.Render("~/bundles/home") 
+}
+@section featured {
+    <section class="featured clear-fix">
+        <div class="content-wrapper clear-fix">
+            <hgroup class="title">
+                <h1>@ViewBag.Title: </h1>
+                <h2>@ViewBag.Count koten gevonden in Gent</h2>
+            </hgroup>
+            
+            @Html.Partial("_UserPanelPartial")
+
+            <div id="filter-wrapper">
+                <div id="filter">
+                    @using (Html.BeginForm("Search", "Overzicht", FormMethod.Post, new { id = "search" })) {    
+                        @Html.Label("Zone:", new { @class = "filterLabel" })
+                        @Html.DropDownList("selectZone", (IEnumerable<SelectListItem>)ViewBag.ZoneList)
+                        @Html.Label("Type:", new { @class = "filterLabel" })
+                        @Html.DropDownList("selectType", (IEnumerable<SelectListItem>)ViewBag.TypeList)
+                        @Html.Label("Prijs:", new { @class = "filterLabel" })
+                        @Html.DropDownList("selectPrice", new List<SelectListItem> { new SelectListItem {Text = "All",Value = "All",Selected = true},new SelectListItem { Text = "0-250€", Value = "250" }, new SelectListItem { Text = "250-500€", Value = "500" }, new SelectListItem { Text = "500€+", Value = "501" } })            
+                        <input type="submit" name="Zoek" value="Zoek" class="float-right"/>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+}
+<div id="home_map">
+
+</div>
+
+
+<aside class="float-right">
+    <h3>Overzicht van @ViewBag.Count koten</h3>
+    <ul id="info_list" class="style1">
+        @foreach (var item in ViewBag.KotInfoList) { 
+            <li class="draggable clear-fix">
+                @Html.ActionLink((string)item.Type + "-" + (string)item.Zone + " " + (string)item.Adres, "ShowDetails","Overzicht", new { item.ID }, new { id=item.ID, @class="SQLData clear-fix", data_title=item.Adres, data_lat=item.Lat, data_Long=item.Long, data_zone=item.Zone, data_type=item.Type, data_price=item.Min_prijs})
+                <div class="prijs float-left">Prijs: @item.Min_prijs</div><div class="prijs float-left">&euro;</div>
+            </li>
+        }
+    </ul>
+</aside>
+<!--aside id="quick-search" class="float-right">
+    <h3>Quick search: </h3>
+    <div>    
+        @Html.Label("Zone:", new { @class = "filterLabel" })
+        @Html.DropDownList("selectZone", (IEnumerable<SelectListItem>)ViewBag.ZoneList, new {@class="clear-fix" })
+        @Html.Label("Type:", new { @class = "filterLabel" })
+        @Html.DropDownList("selectType", (IEnumerable<SelectListItem>)ViewBag.TypeList, new {@class="clear-fix" })
+        @Html.Label("Prijs:", new { @class = "filterLabel" })
+        @Html.DropDownList("selectPrice", new List<SelectListItem> { new SelectListItem {Text = "All",Value = "All",Selected = true},new SelectListItem { Text = "0-250€", Value = "250" }, new SelectListItem { Text = "250-500€", Value = "500" }, new SelectListItem { Text = "500€+", Value = "501" } })            
+    </div>
+</aside-->

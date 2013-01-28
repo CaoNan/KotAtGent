@@ -1,0 +1,27 @@
+ul#menu #navOverzicht {
+    color: #7AC0DA;
+}
+#content_list {
+    padding-top:0px;
+    float: left;
+    width: 40%;
+    margin-left:2%;
+}
+#home_map{
+    display:block;
+    float:right;
+    width: 50%;
+    height:650px;
+    margin-right:2%; 
+}
+ul.style1 {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	overflow-y:hidden;
+    height:auto;
+}
+#rest {
+    border:2px solid #7AC0DA;
+    border-radius:5px;
+}

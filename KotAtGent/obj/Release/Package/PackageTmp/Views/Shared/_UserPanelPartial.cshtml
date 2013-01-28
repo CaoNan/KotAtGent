@@ -1,0 +1,15 @@
+﻿@if (Request.IsAuthenticated) {
+    <section id="user_panel_authenticated" class="float-right droppable" data-userName="@User.Identity.Name">
+        <p>Voeg maximum 3 kotten hier toe gerbuik drag&drop van uit de lijst hier onder:</p>
+        <ul class="style1" style="min-height:200px;list-style:none;margin-left:-8px; overflow-style:panner;">
+            
+        </ul>
+    </section>
+} else {
+    <section id="user_panel" class="float-right">
+        <h3>Resigreer nu om uw ideaal kot vast te leggen voor 24u!</h3>
+        @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new {@class="css3dbuttonRed",id = "registerLink_Panel" })
+        <p>Bent u al geresiteerd? Klick @Html.ActionLink("hier", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink_Panel" }) om te login.</p>
+        
+    </section>
+}

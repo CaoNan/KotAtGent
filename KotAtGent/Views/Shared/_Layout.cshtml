@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - Home</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>
+    <body>
+        <div id="wrapper">
+            <header class="clear-fix">
+                <div class="content-wrapper clear-fix">
+                    <div class="float-left">
+                        <h1 class="site-title">@Html.ActionLink("Kot At Gent", "Index", "Home")</h1>
+                    </div>
+                    <div class="float-right">
+                        <section id="login">
+                            @Html.Partial("_LoginPartial")
+                        </section>
+                        <nav>
+                            <ul id="menu">
+                                <li>@Html.ActionLink("Home", "Index", "Home",null, new { id="navHome"})</li>
+                                <li>@Html.ActionLink("Overzicht", "Index", "Overzicht", null, new { id="navOverzicht"})</li>
+                                <li>@Html.ActionLink("Over Ons", "About", "Home",null, new { id="navAbout"})</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <div id="body" class="clear-fix">
+                @RenderSection("featured", required: false)
+                <section class="content-wrapper main-content clear-fix" style="width:100%; height:100%">
+                    @RenderBody()
+                </section>
+            </div>
+            <footer>
+                <div class="content-wrapper">
+                        <p>Copyright &copy; 2012-@DateTime.Now.Year Nan Cao</p>
+                </div>
+            </footer>
+        </div>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")
+        <script src="~/Scripts/site/dragdrop.js"></script>
+        @RenderSection("scripts", required: false)
+
+    </body>
+</html>
